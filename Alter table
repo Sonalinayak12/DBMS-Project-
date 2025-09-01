@@ -1,0 +1,28 @@
+ALTER TABLE CriminalDetails ADD COLUMN Nationality VARCHAR(50);
+
++-------------+--------------+------+--------+-------------+----------------+-------------+
+| Criminal_ID | Name         | Age  | Gender | Address     | Contact_Number | Nationality |
++-------------+--------------+------+--------+-------------+----------------+-------------+
+|         101 | Raj Kumar    |   34 | Male   | Chennai, TN | 9876543210     | NULL        |
+|         102 | Priya Sharma |   29 | Female | Mumbai, MH  | 9123456780     | NULL        |
++-------------+--------------+------+--------+-------------+----------------+-------------+
+
+
+ ALTER TABLE VictimDetails MODIFY COLUMN Contact VARCHAR(20);
+
++-----------+----------+------+--------+------------+-----------------------+----------+
+| Victim_ID | Name     | Age  | Gender | Contact    | Address               | Crime_ID |
++-----------+----------+------+--------+------------+-----------------------+----------+
+|       201 | Meena S  |   42 | Female | 9887766554 | Peelamedu, Coimbatore |     1001 |
+|       202 | Vikram J |   35 | Male   | 9778877665 | Anna Nagar, Madurai   |     1002 |
++-----------+----------+------+--------+------------+-----------------------+----------+
+
+
+ ALTER TABLE PoliceStation DROP COLUMN Officer_in_Charge;
+
++------------+--------------------+------------+----------------+
+| Station_ID | Station_Name       | Location   | Contact_Number |
++------------+--------------------+------------+----------------+
+|          1 | North Zone Station | Coimbatore | 0422-2456789   |
+|          2 | South Zone Station | Madurai    | 0452-3366987   |
++------------+--------------------+------------+----------------+
