@@ -1,0 +1,92 @@
+1)   INNER JOIN-CrimeRecord and CrimeDetails
+SELECT c.Crime_ID, c.Type_of_Crime, cr.Name, cr.Age, cr.Gender
+    -> FROM CrimeRecord c
+    -> INNER JOIN CriminalDetails cr ON c.Criminal_ID = cr.Criminal_ID;
++----------+---------------+--------------+------+--------+
+| Crime_ID | Type_of_Crime | Name         | Age  | Gender |
++----------+---------------+--------------+------+--------+
+|     1001 | Theft         | Raj Kumar    |   34 | Male   |
+|     1002 | Assault       | Priya Sharma |   29 | Female |
++----------+---------------+--------------+------+--------+
+
+2)   INNER JOIN-CrimeRecord and VictimDetails
+SELECT c.Crime_ID, c.Type_of_Crime, v.Name AS Victim_Name, v.Age AS Victim_Age
+    -> FROM CrimeRecord c
+    -> INNER JOIN VictimDetails v ON c.Crime_ID = v.Crime_ID;
++----------+---------------+-------------+------------+
+| Crime_ID | Type_of_Crime | Victim_Name | Victim_Age |
++----------+---------------+-------------+------------+
+|     1001 | Theft         | Meena S     |         42 |
+|     1002 | Assault       | Vikram J    |         35 |
++----------+---------------+-------------+------------+
+
+3)   LEFT JOIN-CrimeRecord and Investigation
+ SELECT c.Crime_ID, c.Type_of_Crime, i.Status, i.Remarks
+    -> FROM CrimeRecord c
+    -> LEFT JOIN Investigation i ON c.Crime_ID = i.Crime_ID;
++----------+---------------+-------------+--------------------------------+
+| Crime_ID | Type_of_Crime | Status      | Remarks                        |
++----------+---------------+-------------+--------------------------------+
+|     1001 | Theft         | In Progress | Waiting for CCTV footage       |
+|     1002 | Assault       | Closed      | Charges filed against criminal |
++----------+---------------+-------------+--------------------------------+
+4)   RIGHT JOIN-CrimeRecord and WitnessDetails
+SELECT w.Witness_ID, w.Name AS Witness_Name, w.Statement, c.Type_of_Crime
+    -> FROM CrimeRecord c
+    -> RIGHT JOIN WitnessDetails w ON c.Crime_ID = w.Crime_ID;
++------------+--------------+------------------------------------------+---------------+
+| Witness_ID | Witness_Name | Statement                                | Type_of_Crime |
++------------+--------------+------------------------------------------+---------------+
+|        401 | Sundar M     | Saw the suspect running from scene       | Theft         |
+|        402 | Lakshmi N    | Heard shouting and saw a fight break out | Assault       |
++------------+--------------+------------------------------------------+---------------+
+
+5)   INNER JOIN WITH MULTIPLE TABLES
+ SELECT
+    ->     c.Crime_ID,
+    ->     c.Type_of_Crime,
+    ->     cr.Name AS Criminal_Name,
+    ->     v.Name AS Victim_Name,
+    ->     i.Status AS Investigation_Status
+    -> FROM CrimeRecord c
+    -> INNER JOIN CriminalDetails cr ON c.Criminal_ID = cr.Criminal_ID
+    -> INNER JOIN VictimDetails v ON c.Crime_ID = v.Crime_ID
+    -> INNER JOIN Investigation i ON c.Crime_ID = i.Crime_ID;
++----------+---------------+---------------+-------------+----------------------+
+| Crime_ID | Type_of_Crime | Criminal_Name | Victim_Name | Investigation_Status |
++----------+---------------+---------------+-------------+----------------------+
+|     1001 | Theft         | Raj Kumar     | Meena S     | In Progress          |
+|     1002 | Assault       | Priya Sharma  | Vikram J    | Closed               |
++----------+---------------+---------------+-------------+----------------------+
+6)   LEFT JOIN-PoliceStation and CrimeRecord
+ ALTER TABLE PoliceStation ADD Officer_in_Charge VARCHAR(100);
+ ALTER TABLE CrimeRecord ADD Station_ID INT;
+ ALTER TABLE CrimeRecord
+    -> ADD CONSTRAINT fk_station FOREIGN KEY (Station_ID) REFERENCES PoliceStation(Station_ID);
+1) SELECT
+    ->     ps.Station_Name,
+    ->     ps.Officer_in_Charge,
+    ->     c.Type_of_Crime
+    -> FROM PoliceStation ps
+    -> LEFT JOIN CrimeRecord c ON ps.Station_ID = c.Station_ID;
++--------------------+-------------------+---------------+
+| Station_Name       | Officer_in_Charge | Type_of_Crime |
++--------------------+-------------------+---------------+
+| North Zone Station | NULL              | NULL          |
+| South Zone Station | NULL              | NULL          |
++--------------------+-------------------+---------------+
+
+2) SELECT
+    ->     ps.Station_Name,
+    ->     ps.Contact_Number,
+    ->     c.Type_of_Crime
+    -> FROM PoliceStation ps
+    -> LEFT JOIN CrimeRecord c ON ps.Station_ID = c.Station_ID;
++--------------------+----------------+---------------+
+| Station_Name       | Contact_Number | Type_of_Crime |
++--------------------+----------------+---------------+
+| North Zone Station | 0422-2456789   | NULL          |
+| South Zone Station | 0452-3366987   | NULL          |
+
++--------------------+----------------+---------------+
+
