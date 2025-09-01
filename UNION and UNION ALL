@@ -1,0 +1,11 @@
+SELECT Name FROM CriminalDetails
+    -> UNION
+    -> SELECT Name FROM VictimDetails;
++--------------+
+| Name         |
++--------------+
+| Raj Kumar    |
+| Priya Sharma |
+| Meena S      |
+| Vikram J     |
++--------------+
