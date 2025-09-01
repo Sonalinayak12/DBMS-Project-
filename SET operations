@@ -1,0 +1,102 @@
+Set operations:
+Intersect
+ SELECT c.Name
+    -> FROM CriminalDetails c
+    -> INNER JOIN VictimDetails v ON c.Name = v.Name;
++-----------+
+| Name      |
++-----------+
+| Raj Kumar |
++-----------+
+
+EXCEPT equivalent : Criminals not Victims
+ SELECT c.Name
+    -> FROM CriminalDetails c
+    -> LEFT JOIN VictimDetails v ON c.Name = v.Name
+    -> WHERE v.Name IS NULL;
++--------------+
+| Name         |
++--------------+
+| Priya Sharma |
++--------------+
+
+
+EXCEPT equivalent : Victims not Criminals
+ SELECT v.Name
+    -> FROM VictimDetails v
+    -> LEFT JOIN CriminalDetails c ON v.Name = c.Name
+    -> WHERE c.Name IS NULL;
++----------+
+| Name     |
++----------+
+| Meena S  |
+| Vikram J |
++----------+
+
+
+Count total crimes:
+ SELECT COUNT(*) AS Total_Crimes FROM CrimeRecord;
++--------------+
+| Total_Crimes |
++--------------+
+|            2 |
++--------------+
+
+Find average age of criminals:
+ SELECT AVG(Age) AS Avg_Criminal_Age FROM CriminalDetails;
++------------------+
+| Avg_Criminal_Age |
++------------------+
+|          31.5000 |
++------------------+
+
+Find maximum age of victims:
+SELECT MAX(Age) AS Oldest_Victim FROM VictimDetails;
++---------------+
+| Oldest_Victim |
++---------------+
+|            42 |
++---------------+
+
+Number of crimes per criminal:
+ SELECT Criminal_ID, COUNT(*) AS Crime_Count
+    -> FROM CrimeRecord
+    -> GROUP BY Criminal_ID;
++-------------+-------------+
+| Criminal_ID | Crime_Count |
++-------------+-------------+
+|         101 |           1 |
+|         102 |           1 |
++-------------+-------------+
+
+Create a view for ongoing investigations:
+ CREATE VIEW OngoingCases AS
+    -> SELECT c.Crime_ID, c.Type_of_Crime, cr.Name AS Criminal_Name, i.Status
+    -> FROM CrimeRecord c
+    -> INNER JOIN CriminalDetails cr ON c.Criminal_ID = cr.Criminal_ID
+    -> INNER JOIN Investigation i ON c.Crime_ID = i.Crime_ID
+    -> WHERE i.Status = 'Open';
+Query ok,0 rows affected
+
+SHOW FULL TABLES WHERE Table_type = 'VIEW';
++-----------------+------------+
+| Tables_in_mysql | Table_type |
++-----------------+------------+
+| ongoingcases    | VIEW       |
++-----------------+------------+
+
+SELECT * FROM OngoingCases;
++----------+---------------+---------------+--------+
+| Crime_ID | Type_of_Crime | Criminal_Name | Status |
++----------+---------------+---------------+--------+
+|     1001 | Theft         | Raj Kumar     | Open   |
++----------+---------------+---------------+--------+
+
+ SELECT * FROM OngoingCases WHERE Type_of_Crime = 'Theft';
++----------+---------------+---------------+--------+
+| Crime_ID | Type_of_Crime | Criminal_Name | Status |
++----------+---------------+---------------+--------+
+|     1001 | Theft         | Raj Kumar     | Open   |
++----------+---------------+---------------+--------+
+
+
