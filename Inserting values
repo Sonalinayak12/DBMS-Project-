@@ -1,0 +1,53 @@
+1) INSERT INTO CriminalDetails (CriminalID, Name, Age, Gender, Address, ContactNumber)
+VALUES
+    (101, 'Raj Kumar', 34, 'Male', 'Chennai, TN', '9876543210'),
+    (102, 'Priya Sharma', 29, 'Female', 'Mumbai, MH', '9123456780'),
+    (103, 'Arjun Reddy', 40, 'Male', 'Hyderabad, TS', '9812345678'),
+    (104, 'Meena Gupta', 27, 'Female', 'Delhi, DL', '9098765432'),
+    (105, 'Karthik Nair', 36, 'Male', 'Kochi, KL', '9765432109'),
+    (106, 'Anjali Verma', 31, 'Female', 'Jaipur, RJ', '9954321876');
+2) INSERT INTO CrimeRecord (CrimeID, CrimeType, Location, CrimeDate, CrimeTime, Description, CriminalID)
+VALUES
+    (1001, 'Theft', 'Coimbatore Market', '2025-07-10', '20:45:00', 'Stolen purse in crowded area', 101),
+    (1002, 'Assault', 'Madurai Railway Station', '2025-07-15', '18:30:00', 'Physical assault reported by victim', 102),
+    (1003, 'Burglary', 'Hyderabad Banjara Hills', '2025-07-18', '02:15:00', 'House break-in during night hours', 103),
+    (1004, 'Fraud', 'Delhi Connaught Place', '2025-07-20', '11:00:00', 'Fake documents used for loan approval', 104),
+    (1005, 'Robbery', 'Kochi Marine Drive', '2025-07-22', '21:10:00', 'Snatching chain from pedestrian', 105),
+    (1006, 'Cyber Crime', 'Mumbai Cyber Hub', '2025-07-24', '09:30:00', 'Online scam involving bank OTP fraud', 106),
+    (1007, 'Drug Possession', 'Chennai Central', '2025-07-25', '16:20:00', 'Illegal drugs found during routine check', 101),
+    (1008, 'Vandalism', 'Jaipur City Palace', '2025-07-28', '14:50:00', 'Damaged public property in heritage site', 102);
+3) INSERT INTO PoliceStation (StationID, StationName, Location, ContactNumber, HeadOfficer)
+VALUES
+    (1, 'North Zone Station', 'Coimbatore', '0422-2456789', 'Inspector Ramesh'),
+    (2, 'South Zone Station', 'Madurai', '0452-3366987', 'Inspector Kavitha'),
+    (3, 'Central Zone Station', 'Chennai', '044-2789456', 'Inspector Arul'),
+    (4, 'East Zone Station', 'Salem', '0427-2233445', 'Inspector Meenakshi'),
+    (5, 'West Zone Station', 'Tiruppur', '0421-3344556', 'Inspector Suresh'),
+    (6, 'Harbour Station', 'Tuticorin', '0461-4455667', 'Inspector Priya'),
+    (7, 'Hill View Station', 'Ooty', '0423-5566778', 'Inspector Ganesh'),
+    (8, 'City Center Station', 'Trichy', '0431-6677889', 'Inspector Lakshmi');
+4) INSERT INTO VictimDetails (VictimID, Name, Age, Gender, ContactNumber, Address, CrimeID)
+VALUES
+    (201, 'Meena S', 42, 'Female', '9887766554', 'Peelamedu, Coimbatore', 1001),
+    (202, 'Vikram J', 35, 'Male', '9778877665', 'Anna Nagar, Madurai', 1002),
+    (203, 'Rohini P', 29, 'Female', '9665544332', 'Jubilee Hills, Hyderabad', 1003),
+    (204, 'Manoj R', 50, 'Male', '9554433221', 'Karol Bagh, Delhi', 1004),
+5) INSERT INTO Investigation (InvestigationID, CrimeID, StartDate, EndDate, Status, Remarks)
+VALUES
+    (301, 1001, '2025-07-11', NULL, 'Open', 'Waiting for CCTV footage'),
+    (302, 1002, '2025-07-16', '2025-07-20', 'Closed', 'Charges filed against criminal'),
+    (303, 1003, '2025-07-19', NULL, 'Open', 'Suspect under surveillance'),
+    (304, 1004, '2025-07-21', '2025-07-25', 'Closed', 'Fraudster arrested with fake documents'),
+    (305, 1005, '2025-07-23', NULL, 'Open', 'Tracking stolen jewelry'),
+    (306, 1006, '2025-07-24', NULL, 'Open', 'Cyber team analyzing IP addresses'),
+    (307, 1007, '2025-07-26', '2025-07-29', 'Closed', 'Drugs seized and criminal in custody');
+6) INSERT INTO WitnessDetails (WitnessID, Name, ContactNumber, Statement, CrimeID)
+VALUES
+    (401, 'Sundar M', '9871234560', 'Saw the suspect running from scene', 1001),
+    (402, 'Lakshmi N', '9911223344', 'Heard shouting and saw a fight break out', 1002),
+    (403, 'Ramesh K', '9823456789', 'Noticed broken window and suspicious activity', 1003),
+    (404, 'Anita P', '9765432190', 'Observed fraudster submitting fake documents', 1004),
+    (405, 'Joseph D', '9654321876', 'Saw two men snatch chain from woman', 1005),
+    (406, 'Farhan A', '9543218765', 'Received phishing call and reported scam', 1006),
+    (407, 'Geeta S', '9432109876', 'Saw group damaging walls of heritage site', 1008);
+
