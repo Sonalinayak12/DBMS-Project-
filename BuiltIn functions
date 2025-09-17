@@ -1,0 +1,66 @@
+SELECT COUNT(*) AS Total_Criminals FROM CriminalDetails;
+TOTAL_CRIMINALS
+---------------
+              6
+
+SELECT MAX(Age) AS Oldest_Age FROM CriminalDetails;
+OLDEST_AGE
+----------
+        40
+
+SELECT AVG(Age) AS Average_Victim_Age FROM VictimDetails;
+AVERAGE_VICTIM_AGE
+------------------
+                39
+
+SELECT COUNT(Crime_ID) AS Total_Crimes FROM CrimeRecord;
+TOTAL_CRIMES
+------------
+           8
+
+SELECT COUNT(*) AS Open_Investigations
+FROM Investigation
+WHERE Status = 'Open';
+OPEN_INVESTIGATIONS
+-------------------
+                  4
+
+SELECT UPPER(Name) AS Criminal_Name FROM CriminalDetails;
+CRIMINAL_NAME
+--------------------------------------------------------------------------------
+RAJ KUMAR
+PRIYA SHARMA
+ARJUN REDDY
+MEENA GUPTA
+KARTHIK NAIR
+ANJALI VERMA
+
+SELECT LEFT(Name, 5) AS Victim_ShortName FROM VictimDetails;
+VICTIM_SHORTNAME
+----------------
+Meena
+Vikra
+Rohin
+Manoj
+
+SELECT CONCAT(Name, ' - ', Contact) AS Witness_Info
+FROM WitnessDetails;
+WITNESS_INFO
+--------------------------------------------------------------------------------
+Sundar M - 9871234560
+Lakshmi N - 9911223344
+Ramesh K - 9823456789
+Anita P - 9765432190
+Joseph D - 9654321876
+Farhan A - 9543218765
+Geeta S - 9432109876
+
+SELECT MIN(Date) AS First_Crime_Date FROM CrimeRecord;
+FIRST_CRIME_DATE
+----------------
+10-JUL-25
+
+SELECT CURRENT_DATE AS Today;
+TODAY
+----------
+17-SEP-25
