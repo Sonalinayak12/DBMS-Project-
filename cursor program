@@ -1,0 +1,42 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR crime_cur IS
+        SELECT c.Crime_ID, c.Type_of_Crime, c.Location, cd.Name AS Criminal_Name
+        FROM CrimeRecord c
+        JOIN CriminalDetails cd
+        ON c.Criminal_ID = cd.Criminal_ID;
+
+    v_CrimeID        CrimeRecord.Crime_ID%TYPE;
+    v_TypeOfCrime    CrimeRecord.Type_of_Crime%TYPE;
+    v_Location       CrimeRecord.Location%TYPE;
+    v_CriminalName   CriminalDetails.Name%TYPE;
+
+BEGIN
+    OPEN crime_cur;
+    LOOP
+        FETCH crime_cur INTO v_CrimeID, v_TypeOfCrime, v_Location, v_CriminalName;
+        EXIT WHEN crime_cur%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Crime_ID: ' || v_CrimeID || 
+            ' | Crime: ' || v_TypeOfCrime || 
+            ' | Location: ' || v_Location || 
+            ' | Criminal: ' || v_CriminalName
+        );
+    END LOOP;
+    CLOSE crime_cur;
+END;
+/
+
+
+OUTPUT:
+Crime_ID: 1001 | Crime: Theft       | Location: Coimbatore Market   | Criminal: Raj Kumar
+Crime_ID: 1002 | Crime: Assault     | Location: Madurai Railway Sta | Criminal: Priya Sharma
+Crime_ID: 1003 | Crime: Burglary    | Location: Hyderabad Banjara H | Criminal: Arjun Reddy
+Crime_ID: 1004 | Crime: Fraud       | Location: Delhi Connaught Pla | Criminal: Meena Gupta
+Crime_ID: 1005 | Crime: Robbery     | Location: Kochi Marine Drive  | Criminal: Karthik Nair
+Crime_ID: 1006 | Crime: Cyber Crime | Location: Mumbai Cyber Hub    | Criminal: Anjali Verma
+Crime_ID: 1007 | Crime: Drug Posses | Location: Chennai Central     | Criminal: Raj Kumar
+Crime_ID: 1008 | Crime: Vandalism   | Location: Jaipur City Palace  | Criminal: Priya Sharma
+
