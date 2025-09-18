@@ -1,0 +1,27 @@
+CREATE OR REPLACE TRIGGER trg_witness_unique_phone
+BEFORE INSERT OR UPDATE ON WitnessDetails
+FOR EACH ROW
+DECLARE
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM WitnessDetails
+    WHERE Phone = :NEW.Phone;
+
+    IF v_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Duplicate phone number not allowed for witnesses.');
+    END IF;
+END;
+/
+
+OUTPUT:
+INSERT INTO WitnessDetails VALUES
+(501, 'Suresh K', '9876543210', 'Saw the suspect near shop', 1001);
+1 row created.
+INSERT INTO WitnessDetails VALUES
+(502, 'Ravi M', '9876543210', 'Heard loud noise', 1002);
+ERROR at line 1:
+ORA-20001: Duplicate phone number not allowed for witnesses.
+ORA-06512: at "TRG_WITNESS_UNIQUE_PHONE", line 8
+ORA-04088: error during execution of trigger 'TRG_WITNESS_UNIQUE_PHONE
